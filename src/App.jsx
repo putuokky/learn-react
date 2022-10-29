@@ -1,60 +1,20 @@
-import {
-    IconBrandFacebook,
-    IconBrandGithub,
-    IconBrandTwitter,
-} from '@tabler/icons';
-import clsx from 'clsx';
+import Card from './components/Card';
+import Button from './components/Button';
 
 export default function App() {
     return (
-        <div className={`bg-slate-900 grid place-content-center min-h-screen`}>
-            <div className='flex gap-x-2'>
-                <Button
-                    {...{
-                        type: 'submit',
-                        onClick: () =>
-                            console.log('Login with another style....'),
-                    }}
-                >
-                    <IconBrandFacebook />
-                    Login
-                </Button>
-                <Button onClick={() => console.log('Register')} type='submit'>
-                    <IconBrandFacebook />
-                    Login
-                </Button>
-                <Button
-                    className='bg-sky-600'
-                    onClick={() => console.log('Login')}
-                    type='button'
-                >
-                    <IconBrandTwitter />
-                    Login
-                </Button>
-                <Button
-                    className='bg-black'
-                    onClick={() => console.log('Login')}
-                    type='button'
-                >
-                    <IconBrandGithub />
-                    Login
-                </Button>
+        <div className={`bg-slate-100 text-slate-800 tracking-tighter antialiased flex items-center justify-center min-h-screen`}>
+            <div className='max-w-xl w-full'>
+                <Card>
+                    <Card.Title>Hellow React</Card.Title>
+                    <Card.Body>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo porro harum deserunt, a in soluta incidunt consectetur libero accusamus, dolore qui tempora itaque recusandae quod, vel hic minima laudantium aperiam.
+                    </Card.Body>
+                    <Card.Footer>
+                        <Button>Register</Button>
+                    </Card.Footer>
+                </Card>
             </div>
         </div>
-    );
-}
-
-function Button(props) {
-    const { className = 'bg-blue-600', children, text } = props;
-    return (
-        <button
-            {...props}
-            className={clsx(
-                className,
-                '[&>svg]:w-5 [&>svg]:h-5 [&>svg]:stroke-1 flex items-center gap-x-2 text-white px-4 py-2 rounded'
-            )}
-        >
-            {text || children}
-        </button>
     );
 }
