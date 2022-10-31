@@ -1,20 +1,25 @@
 import Card from './components/Card';
 import Button from './components/Button';
+import PlaceContentCenter from './components/PlaceContentCenter';
+import { useState } from 'react';
 
 export default function App() {
+    const [count, setCount] = useState(0);
+
+    function handleClick() {
+        setCount(count => count + 1);
+    }
     return (
-        <div className={`bg-slate-100 text-slate-800 tracking-tighter antialiased flex items-center justify-center min-h-screen`}>
-            <div className='max-w-xl w-full'>
-                <Card>
-                    <Card.Title>Hellow React</Card.Title>
-                    <Card.Body>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo porro harum deserunt, a in soluta incidunt consectetur libero accusamus, dolore qui tempora itaque recusandae quod, vel hic minima laudantium aperiam.
-                    </Card.Body>
-                    <Card.Footer>
-                        <Button>Register</Button>
-                    </Card.Footer>
-                </Card>
+        <PlaceContentCenter>
+            <h1 className='text-5xl font-bold'>{count}</h1>
+            <div className='mt-5 flex items-center gap-2'>
+                <Button onClick={handleClick}>+1</Button>
+                <Button onClick={() => {
+                    handleClick();
+                    handleClick();
+                    handleClick();
+                }}>+3</Button>
             </div>
-        </div>
+        </PlaceContentCenter>
     );
 }
