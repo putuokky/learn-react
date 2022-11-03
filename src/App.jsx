@@ -16,7 +16,7 @@ export default function App() {
         async function getUsers() {
             setLoading(true);
             try {
-                const { data } = await axios('https://jsonplaceholder.typicode.com/usersw');
+                const { data } = await axios('https://jsonplaceholder.typicode.com/users');
                 setUsers(data);
                 setLoading(false);
             } catch (error) {
