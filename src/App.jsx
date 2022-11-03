@@ -1,32 +1,45 @@
 import { useRef } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import Button from './components/Button';
 import Card from './components/Card';
 import Input from './components/Input';
 import PlaceContentCenter from './components/PlaceContentCenter';
 import Todo from './components/Todo';
+import axios from "axios";
 
 export default function App() {
-    // const [tick, setTick] = useState(0);
-    const inputRef = useRef(null);
+    const [loading, setLoading] = useState(false);
+    const [users, setUsers] = useState([]);
 
-    function handleClick() {
-        // tick.current = tick.current + 1;
-        // console.log(tick.current);
-        // const nextTick = tick + 1;
-        // setTick(nextTick);
-        // console.log(nextTick);
-    }
+    useEffect(() => {
+        async function getUsers() {
+            setLoading(true);
+            try {
+                const { data } = await axios('https://jsonplaceholder.typicode.com/usersw');
+                setUsers(data);
+                setLoading(false);
+            } catch (error) {
+                console.log(error.message);
+                setLoading(false);
+            }
+        }
+        getUsers().then(r => r);
+
+    }, []);
+
     return (
         <PlaceContentCenter>
             <Card>
-                <Card.Title>useRef Hooks</Card.Title>
+                <Card.Title>Users: {users.length}</Card.Title>
                 <Card.Body>
-                    <Input isFocused className='border border-slate-600' ref={inputRef} />
-                    <Button onClick={handleClick}>Tick</Button>
+                    {loading ? <div>Loading ....</div> : <ol>
+                        {users.map((user) => (
+                            <li key={user.id}>{user.name} ({user.username})</li>
+                        ))}
+                    </ol>}
                 </Card.Body>
-                {/* <Card.Footer>You click {tick.current} times.</Card.Footer> */}
             </Card>
-        </PlaceContentCenter >
+        </PlaceContentCenter>
     );
 }
